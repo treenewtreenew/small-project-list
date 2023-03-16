@@ -1,0 +1,9 @@
+1, deploy web-server : kubectl create -f web-server.yaml
+2, check deploy : kubectl get deployments
+3, see the pod : kubectl get pods -o wide (-o wide to see more information about the pod)
+4, create a job : kubectl create -f client-job.yaml
+5, check job logs : kubectl logs client-job-etgab
+6, create a service : kubectl create -f web-app-service.yaml
+7, check service : kubectl get svc
+practise according to this article : 
+https://dev.to/narasimha1997/communication-between-microservices-in-a-kubernetes-cluster-1n41

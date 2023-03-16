@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: client-job-env
+spec:
+  template:
+    spec:
+      containers:
+      - name: client
+        image: byrnedo/alpine-curl
+        command: ["/bin/sh", "-c", "curl -s http://${WEB_APP_SERVICE_SERVICE_HOST}:${WEB_APP_SERVICE_SERVICE_PORT}"]
+      restartPolicy: Never
+  backoffLimit: 4
