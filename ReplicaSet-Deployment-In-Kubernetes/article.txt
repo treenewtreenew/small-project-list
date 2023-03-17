@@ -1,0 +1,4 @@
+https://amolmote.hashnode.dev/replicaset-deployment-in-kubernetes#heading-yaml-file-for-pod
+https://blog.kubesimplify.com/pods-in-kubernetes
+
+Pod lifecycle:
