@@ -1,0 +1,24 @@
+Pod
+The smallest unit that Kubernetes administers, can contain one or more containers. Pods have a single IP address that is assigned to every container within the pod.
+Deployment
+Define the way at which you want to run your application by letting you set the details of your pods, like replicas, update strategy, etc. It will describe to Kubernetes your application's desired state.
+Service
+Abstraction over the pods, the interface the various application consumers interact with because pod states are always changing and cant be relied on.
+Node
+Manages and runs pods, it's a machine (virtual or physical) that performs the given work.
+Control Plane
+The main entry point of the administrators and users to manage the various nodes.
+Cluster
+All the above components put together as a single unit.
+API Server
+Exposes a REST interface to the Kubernetes cluster. All operations on pods, services, etc. are executed with the API endpoints provided by it.
+Scheduler
+Responsible for assigning work to various nodes, keeping watch over the resource capacity, and ensuring that a worker node's performance is within an appropriate threshold.
+Controller Manager
+Making sure that the state of the cluster components works as expected, oversees various controllers which respond to events, like when a node goes down.
+Kubelet
+Tracks the state of a pod to ensure that all the containers are running. It provides a heartbeat message every few seconds to the control plane.
+Kube proxy
+Routes the traffic coming into a node from the service into the correct containers.
+etcd
+Distributed key-value store that Kubernetes uses to share information about the overall state of a cluster.
