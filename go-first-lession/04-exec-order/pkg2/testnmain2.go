@@ -1,4 +1,4 @@
-package pkg1
+package pkg2
 
 import (
 	"fmt"
@@ -10,5 +10,5 @@ func Main() {
 }​
 
 func main() {
-	fmt.Println("main func for pkg1")
+	fmt.Println("main func for pkg2")
 }
