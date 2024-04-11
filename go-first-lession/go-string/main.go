@@ -2,17 +2,10 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"unicode/utf8"
+	"unsafe"
 )
-
-func main() {
-	//string_cannot_be_changed()
-	//string_content()
-	//rune_in_go()
-	//string_literal()
-	//encodeRune()
-	decodeRune()
-}
 
 // concurrent safety
 // remove \0
@@ -89,4 +82,30 @@ func decodeRune() {
 	var buf = []byte{0xE4, 0xB8, 0xAD}
 	r, _ := utf8.DecodeRune(buf)
 	fmt.Printf("the unicode character after decoding [0xE4, 0xB8, 0xAD] is %s\n", string(r))
+}
+
+func dumpBytesArray(arr []byte) {
+	fmt.Printf("[")
+	for _, b := range arr {
+		fmt.Printf("%c ", b)
+	}
+	fmt.Printf("]\n")
+}
+
+func main() {
+	var s = "hello"
+	hdr := (*reflect.StringHeader)(unsafe.Pointer(&s)) // 将string类型变量地址显式转型为reflect.StringHeader
+	fmt.Printf("0x%x\n", hdr.Data)                     // 0x10a30e0
+	p := (*[5]byte)(unsafe.Pointer(hdr.Data))          // 获取Data字段所指向的数组的指针
+	dumpBytesArray((*p)[:])                            // [h e l l o ]   // 输出底层数组的内容
+
+	var ss = "中国人"
+	fmt.Printf("0x%x\n", ss[0]) // 0xe4：字符“中” utf-8编码的第一个字节
+
+	for i := 0; i < len(ss); i++ {
+		fmt.Printf("index: %d, value: 0x%x\n", i, ss[i])
+	}
+	for i, v := range ss {
+		fmt.Printf("index: %d, value: 0x%x\n", i, v)
+	}
 }
