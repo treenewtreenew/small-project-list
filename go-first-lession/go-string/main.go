@@ -92,7 +92,7 @@ func dumpBytesArray(arr []byte) {
 	fmt.Printf("]\n")
 }
 
-func main() {
+func string_internal() {
 	var s = "hello"
 	hdr := (*reflect.StringHeader)(unsafe.Pointer(&s)) // 将string类型变量地址显式转型为reflect.StringHeader
 	fmt.Printf("0x%x\n", hdr.Data)                     // 0x10a30e0
@@ -108,4 +108,75 @@ func main() {
 	for i, v := range ss {
 		fmt.Printf("index: %d, value: 0x%x\n", i, v)
 	}
+}
+
+func range_iterator() {
+	var s = "中国人"
+
+	for i, v := range s {
+		fmt.Printf("index: %d, value: %c\n", i, v)
+	}
+}
+
+func str_length() {
+	var s = "中国人"
+	fmt.Println("the length of s is ", utf8.RuneCountInString(s))
+}
+
+func str_concat() {
+	s := "Rob pike, "
+	s = s + "Robert Griesemer,"
+	s += " Ken Thompson"
+	fmt.Println(s)
+}
+
+func comparing_str() {
+
+	// ==
+	s1 := "世界和平"
+	s2 := "世界" + "和平"
+	fmt.Println(s1 == s2) // true
+
+	// !=
+	s1 = "Go"
+	s2 = "C"
+	fmt.Println(s1 != s2) // true
+
+	// < and <=
+	s1 = "12345"
+	s2 = "23456"
+	fmt.Println(s1 < s2)  // true
+	fmt.Println(s1 <= s2) // true
+
+	// > and >=
+	s1 = "12345"
+	s2 = "123"
+	fmt.Println(s1 > s2)  // true
+	fmt.Println(s1 >= s2) // true
+
+}
+
+func str_transformation() {
+	var s string = "中国人"
+
+	// string -> []rune
+	rs := []rune(s)
+	fmt.Printf("%x\n", rs) // [4e2d 56fd 4eba]
+	fmt.Printf("%c\n", rs)
+
+	// string -> []byte
+	bs := []byte(s)
+	fmt.Printf("%x\n", bs) // e4b8ade59bbde4baba
+
+	// []rune -> string
+	s1 := string(rs)
+	fmt.Println(s1) // 中国人
+
+	// []byte -> string
+	s2 := string(bs)
+	fmt.Println(s2) // 中国人
+}
+
+func main() {
+	str_transformation()
 }
