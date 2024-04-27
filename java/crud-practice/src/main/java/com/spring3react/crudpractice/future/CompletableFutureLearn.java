@@ -1,6 +1,4 @@
-package com.spring3react.crudpractice.practice;
-
-import sun.jvm.hotspot.utilities.Assert;
+package com.spring3react.crudpractice.future;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
