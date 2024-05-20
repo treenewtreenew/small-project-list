@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func firstFor() {
 	var sum int
@@ -105,6 +108,46 @@ outer:
 	}
 }
 
+func variableReuse_1() {
+	var m = []int{1, 2, 3, 4, 5}
+
+	for i, v := range m {
+		go func() {
+			time.Sleep(time.Second * 3)
+			fmt.Println(i, v)
+		}()
+	}
+	time.Sleep(time.Second * 10)
+}
+
+func variableReuse_2() {
+	var m = []int{1, 2, 3, 4, 5}
+	{
+		i, v := 0, 0
+		for i, v = range m {
+			go func() {
+				time.Sleep(time.Second * 3)
+				fmt.Println(i, v)
+			}()
+		}
+	}
+	time.Sleep(time.Second * 10)
+}
+
+func variableReuse_3() {
+	var m = []int{1, 2, 3, 4, 5}
+	{
+		i, v := 0, 0
+		for i, v = range m {
+			go func(i, v int) {
+				time.Sleep(time.Second * 3)
+				fmt.Println(i, v)
+			}(i, v)
+		}
+	}
+	time.Sleep(time.Second * 10)
+}
+
 func main() {
 	firstFor()
 	noDeclareFor()
@@ -113,4 +156,7 @@ func main() {
 	forRangeString()
 	forMap()
 	labelContinue()
+	variableReuse_1()
+	variableReuse_2()
+	variableReuse_3()
 }
