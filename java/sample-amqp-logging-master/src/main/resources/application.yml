@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: api-service-4
+
+server:
+  port: ${PORT:1234}
+
+app.amqp.url: localhost:5672
