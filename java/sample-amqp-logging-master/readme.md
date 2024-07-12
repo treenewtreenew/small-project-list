@@ -13,6 +13,9 @@ bootstrap check failure [1] of [1]: the default discovery settings are unsuitabl
 fix error2 : -e "discovery.type=single-node"
 docker run -d -it --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.17.19
 
+## kibana
+docker run -d -it --name kibana --link es:elasticsearch -p 5601:5601 kibana
+
 ## logstash
 docker run -d -it --name logstash logstash:7.17.19 -e 'input { rabbitmq {
 host => "localhost" port => 30000 durable => true } }
