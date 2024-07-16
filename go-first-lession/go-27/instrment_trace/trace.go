@@ -1,4 +1,4 @@
-package main
+package trace
 
 import (
 	"bytes"
@@ -64,58 +64,4 @@ func Trace() func() {
 		mu.Unlock()
 		printTrace(gid, name, "<-", indents)
 	}
-}
-
-func foo() {
-	defer Trace()()
-	bar()
-}
-
-func bar() {
-	defer Trace()()
-}
-
-// trace2/trace.go
-func A1() {
-	defer Trace()()
-	B1()
-}
-
-func B1() {
-	defer Trace()()
-	C1()
-}
-
-func C1() {
-	defer Trace()()
-	D()
-}
-
-func D() {
-	defer Trace()()
-}
-
-func A2() {
-	defer Trace()()
-	B2()
-}
-func B2() {
-	defer Trace()()
-	C2()
-}
-func C2() {
-	defer Trace()()
-	D()
-}
-
-func main() {
-	var wg sync.WaitGroup
-	wg.Add(1)
-	go func() {
-		A2()
-		wg.Done()
-	}()
-
-	A1()
-	wg.Wait()
 }
